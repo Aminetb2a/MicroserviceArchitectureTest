@@ -1,0 +1,42 @@
+zuul:
+  #Service will be mapped under the /api URI
+  prefix: /api
+  routes:
+    hello-server:
+      path: /server/**
+#      url: http://localhost:8071
+      serviceId: HELLO-SERVER
+    hello-client:
+      path: /client/**
+      serviceId: HELLO-CLIENT
+
+server:
+  port: 8079
+
+spring:
+  application:
+    name: zuul-service
+
+eureka:
+  instance:
+    hostname: eureka-0
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http//:eureka-0.eureka.default.svc.cluster.local:8761/eureka
+
+# Increase the Hystrix timeout to 60s (for all)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+management:
+  endpoint:
+    exposure:
+      includes: hystrix.stream

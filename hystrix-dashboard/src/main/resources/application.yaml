@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: hystrix-dashboard
+
+server:
+  port: 9295
+
+eureka:
+  instance:
+    hostname: eureka-0
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http//:eureka-0.eureka.default.svc.cluster.local:8761/eureka
+
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"

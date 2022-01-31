@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: hello-server
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+
+server:
+  port: 8071
+
+eureka:
+  instance:
+    hostname: eureka-0
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http//:eureka-0.eureka.default.svc.cluster.local:8761/eureka
